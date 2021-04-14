@@ -37,8 +37,8 @@ class Types {
 	// Supported Test Object Types
 	public static final EidMap<TestObjectTypeDto> TE_SUPPORTED_TEST_OBJECT_TYPES = TestObjectTypeDetectorManager
 			.getTypes(
-					// WFS_2_0_TOT
-					"9b6ef734-981e-4d60-aa81-d6730a1c6389");
+					// API-FEATURES
+					"373d2cc8-9c87-4224-a80a-007fb4c9abb3");
 
 	// Supported Test Item Types
 	public static final EidMap<TestItemTypeDto> TE_TEST_ITEM_TYPES = new DefaultEidMap<TestItemTypeDto>() {

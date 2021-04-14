@@ -70,7 +70,7 @@ class TeTypeLoader implements EtsTypeLoader {
 	private final static String suitesPath = "rest/suites";
 	private final static Set<String> whiteListEts = new HashSet<String>() {
 		{
-			add("WFS 2.0 (OGC 09-025r2/ISO 19142) Conformance Test Suite");
+			add("OGC API - Features Conformance Test Suite");
 		}
 	};
 
@@ -91,7 +91,7 @@ class TeTypeLoader implements EtsTypeLoader {
 	public static final TranslationTemplateBundleDto TE_TRANSLATION_TEMPLATE_BUNDLE = createTranslationTemplateBundle();
 	
 	//Hotfix for using OGC API TEAM engine endpoint
-	private static final String TEAM_WFS_VERSION = "1.34";
+	private static final String TEAM_WFS_VERSION = "1.0";
 	
 	private boolean initialized = false;
 	private final EidHolderMap<ExecutableTestSuiteDto> propagatedDtos = new DefaultEidHolderMap<>();
