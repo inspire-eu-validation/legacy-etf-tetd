@@ -254,11 +254,13 @@ class TeTypeLoader implements EtsTypeLoader {
 			// Get list of Executable Test Suites
 			final String etsOverview = UriUtils.loadAsString(suitesUri, credentials);
 			final Document etsOverviewDoc = Jsoup.parse(etsOverview);
-			final Elements etsUrls = etsOverviewDoc.select("body ul li a[href]");
+			final Elements etsUrls = etsOverviewDoc.select("testSuites testSuite endpoint");
 			for (final Element etsUrl : etsUrls) {
 				// Get single ETS
 				final String etsDetails;
-				final String etsUrlStr = UriUtils.getParent(suitesUri).toString() + etsUrl.attr("href");
+				//HOTFIX for issue https://github.com/opengeospatial/teamengine/issues/469
+				final String etsUrlStr = etsUrl.text().replace("suites","suites/");
+				
 				try {
 					etsDetails = UriUtils.loadAsString(new URI(etsUrlStr), credentials);
 				} catch (URISyntaxException e) {
