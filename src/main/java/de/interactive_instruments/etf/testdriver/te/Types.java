@@ -38,7 +38,7 @@ class Types {
 	public static final EidMap<TestObjectTypeDto> TE_SUPPORTED_TEST_OBJECT_TYPES = TestObjectTypeDetectorManager
 			.getTypes(
 					// API-FEATURES
-					"373d2cc8-9c87-4224-a80a-007fb4c9abb3");
+					"1e8c4f6d-c4f4-4e1c-bfc3-414469ce6910");
 
 	// Supported Test Item Types
 	public static final EidMap<TestItemTypeDto> TE_TEST_ITEM_TYPES = new DefaultEidMap<TestItemTypeDto>() {
@@ -70,9 +70,9 @@ class Types {
 
 	private static TagDto createTeTag() {
 		final TagDto tag = new TagDto();
-		tag.setId(EidFactory.getDefault().createUUID("268af871-5cf0-443e-834a-ce40bed6c0e3"));
-		tag.setPriority(1000);
-		tag.setLabel("OGC Test Suites (remote execution)");
+		tag.setId(EidFactory.getDefault().createUUID("724c1a65-4ae6-47ec-bf61-ba35f81a390a"));
+        tag.setPriority(1001);
+        tag.setLabel("OGC API Features Test Suites (remote execution)");
 		tag.setDescription("Executable Test Suites that are executed on a remote OGC TEAM Engine instance");
 		return tag;
 	}

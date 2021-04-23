@@ -91,7 +91,7 @@ class TeTypeLoader implements EtsTypeLoader {
 	public static final TranslationTemplateBundleDto TE_TRANSLATION_TEMPLATE_BUNDLE = createTranslationTemplateBundle();
 	
 	//Hotfix for using OGC API TEAM engine endpoint
-	private static final String TEAM_WFS_VERSION = "1.0";
+	private static final String TEAM_FEATURES_VERSION = "1.0";
 	
 	private boolean initialized = false;
 	private final EidHolderMap<ExecutableTestSuiteDto> propagatedDtos = new DefaultEidHolderMap<>();
@@ -99,7 +99,7 @@ class TeTypeLoader implements EtsTypeLoader {
 
 	private static TranslationTemplateBundleDto createTranslationTemplateBundle() {
 		final TranslationTemplateBundleDto translationTemplateBundle = new TranslationTemplateBundleDto();
-		translationTemplateBundle.setId(EidFactory.getDefault().createAndPreserveStr("62605758-f4ab-4ad8-9091-bde90467ecdd"));
+		translationTemplateBundle.setId(EidFactory.getDefault().createAndPreserveStr("e15ed4de-5a73-429a-ae4c-bff646f96653"));
 		translationTemplateBundle.setSource(URI.create("library://etf-tetd"));
 		final List<TranslationTemplateDto> translationTemplateDtos = new ArrayList<TranslationTemplateDto>() {
 			{
@@ -281,7 +281,7 @@ class TeTypeLoader implements EtsTypeLoader {
 				// The ETS ID is generated from the URL without the version
 				final String etsUrlWithoutVersion = UriUtils.getParent(etsUrlStr);
 				ets.setId(EidFactory.getDefault().createUUID(etsUrlWithoutVersion));
-				ets.setVersionFromStr(TEAM_WFS_VERSION);
+				ets.setVersionFromStr(TEAM_FEATURES_VERSION);
 				// Check if an ETS already exists and if the version matches
 				boolean create = true;
 				if (etsDao.exists(ets.getId())) {
@@ -335,8 +335,8 @@ class TeTypeLoader implements EtsTypeLoader {
 
 		final LangTranslationTemplateCollectionDto defaultErr = TE_TRANSLATION_TEMPLATE_BUNDLE
 				.getTranslationTemplateCollection("TR.teamEngineError");
-		final TestItemTypeDto testNgAsseriton = TE_TEST_ITEM_TYPES.get("161baae7-6c84-4bce-8185-3d3618a66011");
-		final TestItemTypeDto testNgStep = TE_TEST_ITEM_TYPES.get("b0469ab7-9d69-49ff-98a1-4c7960829b82");
+		final TestItemTypeDto testNgAsseriton = TE_TEST_ITEM_TYPES.get("cbdc25c3-e4fa-4eef-a222-f64f56426f88");
+        final TestItemTypeDto testNgStep = TE_TEST_ITEM_TYPES.get("83ca3326-c9f4-4cd5-be01-ee88e803ac0a");
 
 		// Test Modules
 		for (Node testModule = XmlUtils.getFirstChildNodeOfType(testSuite, ELEMENT_NODE,

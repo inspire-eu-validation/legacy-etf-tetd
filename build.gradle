@@ -26,7 +26,7 @@ apply from: 'build/gradle/ii-bda.gradle'
 ///////////////////////////////////////////////////////////////////////////////////////
 
 group = 'de.interactive_instruments.etf.testdriver'
-description = "ETF Team Engine test driver"
+description = "ETF Team Engine test driver TEAM Engine test driver"
 
 ext.testDeploymentDir = project.file('./build/tmp/td')
 

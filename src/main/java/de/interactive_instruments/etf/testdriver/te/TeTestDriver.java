@@ -75,7 +75,7 @@ public class TeTestDriver extends AbstractTestDriver {
 	final static ComponentInfo COMPONENT_INFO = new ComponentInfo() {
 		@Override
 		public String getName() {
-			return "TEAM Engine test driver";
+			return "TEAM Engine test driver OGC API Features";
 		}
 
 		@Override

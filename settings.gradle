@@ -1,2 +1,2 @@
-rootProject.name = 'etf-tetd'
+rootProject.name = 'etf-tetd-api-features'
 gradle.ext.set('ii.license.header', 'eupl-12-license-eu-copy')
