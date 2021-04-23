@@ -281,8 +281,8 @@ class TeTypeLoader implements EtsTypeLoader {
 				ets.setReference(etsUrlStr);
 				ets.setRemoteResource(URI.create(etsUrlStr));
 				// The ETS ID is generated from the URL without the version
-				final String etsUrlWithoutVersion = UriUtils.getParent(etsUrlStr);
-				ets.setId(EidFactory.getDefault().createUUID(etsUrlWithoutVersion));
+				//final String etsUrlWithoutVersion = UriUtils.getParent(etsUrlStr);
+				ets.setId(EidFactory.getDefault().createUUID(etsUrlStr));
 				ets.setVersionFromStr(TEAM_FEATURES_VERSION);
 				// Check if an ETS already exists and if the version matches
 				boolean create = true;
