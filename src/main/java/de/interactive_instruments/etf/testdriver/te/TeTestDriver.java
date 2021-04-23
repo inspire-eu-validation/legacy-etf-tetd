@@ -144,7 +144,7 @@ public class TeTestDriver extends AbstractTestDriver {
 		}
 
 		final String teUrl = configProperties.getPropertyOrDefault(TE_REMOTE_URL,
-				"http://cite.opengeospatial.org/teamengine");
+				"https://cite.opengeospatial.org/teamengine");
 		if (SUtils.isNullOrEmpty(teUrl)) {
 			throw new ConfigurationException("Property " + TE_REMOTE_URL + " not set");
 		}
