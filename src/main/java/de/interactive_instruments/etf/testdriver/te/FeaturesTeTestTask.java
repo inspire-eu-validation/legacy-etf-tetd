@@ -59,7 +59,7 @@ import de.interactive_instruments.exceptions.config.ConfigurationException;
  *
  * @author Jon Herrmann ( herrmann aT interactive-instruments doT de )
  */
-class TeTestTask extends AbstractTestTask {
+class FeaturesTeTestTask extends AbstractTestTask {
 
 	private final int timeout;
 	private final Credentials credentials;
@@ -71,9 +71,9 @@ class TeTestTask extends AbstractTestTask {
 	 *
 	 * @throws IOException I/O error
 	 */
-	public TeTestTask(final int timeout, final Credentials credentials, final TeTypeLoader typeLoader,
+	public FeaturesTeTestTask(final int timeout, final Credentials credentials, final TeTypeLoader typeLoader,
 			final TestTaskDto testTaskDto) {
-		super(testTaskDto, new TeTestTaskProgress(), TeTestTask.class.getClassLoader());
+		super(testTaskDto, new TeTestTaskProgress(), WfsTeTestTask.class.getClassLoader());
 		this.timeout = timeout;
 		this.credentials = credentials;
 		this.typeLoader = typeLoader;

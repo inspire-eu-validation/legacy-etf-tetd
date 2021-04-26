@@ -35,10 +35,14 @@ class Types {
 	private Types() {}
 
 	// Supported Test Object Types
-	public static final EidMap<TestObjectTypeDto> TE_SUPPORTED_TEST_OBJECT_TYPES = TestObjectTypeDetectorManager
+	public static final EidMap<TestObjectTypeDto> FEATURES_TE_SUPPORTED_TEST_OBJECT_TYPES = TestObjectTypeDetectorManager
 			.getTypes(
-					// API-FEATURES
+					// API-FEATURES // 
 					"1e8c4f6d-c4f4-4e1c-bfc3-414469ce6910");
+	public static final EidMap<TestObjectTypeDto> WFS_TE_SUPPORTED_TEST_OBJECT_TYPES = TestObjectTypeDetectorManager
+			.getTypes(
+					// WFS 2.0 
+					"9b6ef734-981e-4d60-aa81-d6730a1c6389");
 
 	// Supported Test Item Types
 	public static final EidMap<TestItemTypeDto> TE_TEST_ITEM_TYPES = new DefaultEidMap<TestItemTypeDto>() {

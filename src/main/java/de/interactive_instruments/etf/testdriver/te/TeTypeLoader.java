@@ -71,6 +71,7 @@ class TeTypeLoader implements EtsTypeLoader {
 	private final static Set<String> whiteListEts = new HashSet<String>() {
 		{
 			add("OGC API - Features Conformance Test Suite");
+			add("WFS 2.0 (OGC 09-025r2/ISO 19142) Conformance Test Suite");
 		}
 	};
 
@@ -311,7 +312,11 @@ class TeTypeLoader implements EtsTypeLoader {
 					ets.setLastUpdateDateNow();
 					ets.setTranslationTemplateBundle(TE_TRANSLATION_TEMPLATE_BUNDLE);
 					ets.setTestDriver(new ComponentDto(driverInfo));
-					ets.setSupportedTestObjectTypes(TE_SUPPORTED_TEST_OBJECT_TYPES.asList());
+					if(label.equals("WFS 2.0 (OGC 09-025r2/ISO 19142) Conformance Test Suite")) {
+						ets.setSupportedTestObjectTypes(WFS_TE_SUPPORTED_TEST_OBJECT_TYPES.asList());
+					}else {
+						ets.setSupportedTestObjectTypes(FEATURES_TE_SUPPORTED_TEST_OBJECT_TYPES.asList());
+					}
 					addEts(ets);
 				}
 			}

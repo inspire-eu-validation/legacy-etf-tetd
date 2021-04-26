@@ -21,13 +21,17 @@ package de.interactive_instruments.etf.testdriver.te;
 
 import static de.interactive_instruments.etf.EtfConstants.ETF_DATA_STORAGE_NAME;
 import static de.interactive_instruments.etf.testdriver.te.TeTestDriver.TE_TEST_DRIVER_EID;
-import static de.interactive_instruments.etf.testdriver.te.Types.TE_SUPPORTED_TEST_OBJECT_TYPES;
+import static de.interactive_instruments.etf.testdriver.te.Types.WFS_TE_SUPPORTED_TEST_OBJECT_TYPES;
+import static de.interactive_instruments.etf.testdriver.te.Types.FEATURES_TE_SUPPORTED_TEST_OBJECT_TYPES;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import de.interactive_instruments.CLUtils;
 import de.interactive_instruments.Credentials;
@@ -75,7 +79,7 @@ public class TeTestDriver extends AbstractTestDriver {
 	final static ComponentInfo COMPONENT_INFO = new ComponentInfo() {
 		@Override
 		public String getName() {
-			return "TEAM Engine test driver OGC API Features";
+			return "TEAM Engine test driver";
 		}
 
 		@Override
@@ -105,7 +109,7 @@ public class TeTestDriver extends AbstractTestDriver {
 
 	@Override
 	public Collection<TestObjectTypeDto> getTestObjectTypes() {
-		return TE_SUPPORTED_TEST_OBJECT_TYPES.values();
+		return Stream.concat(WFS_TE_SUPPORTED_TEST_OBJECT_TYPES.values().stream(), WFS_TE_SUPPORTED_TEST_OBJECT_TYPES.values().stream()).collect(Collectors.toList());
 	}
 
 	@Override
@@ -124,7 +128,13 @@ public class TeTestDriver extends AbstractTestDriver {
 			final TestTaskResultDto testTaskResult = new TestTaskResultDto();
 			testTaskResult.setId(EidFactory.getDefault().createRandomId());
 			testTaskDto.setTestTaskResult(testTaskResult);
-			return new TeTestTask(
+			switch(testTaskDto.getExecutableTestSuite().getLabel()) {
+			case "OGC API - Features Conformance Test Suite":
+				return new FeaturesTeTestTask(
+						(int) TimeUnit.SECONDS.toMillis(configProperties.getPropertyOrDefaultAsInt(TE_TIMEOUT_SEC, 1200)),
+						credentials, (TeTypeLoader) typeLoader, testTaskDto);
+			}
+			return new WfsTeTestTask(
 					(int) TimeUnit.SECONDS.toMillis(configProperties.getPropertyOrDefaultAsInt(TE_TIMEOUT_SEC, 1200)),
 					credentials, (TeTypeLoader) typeLoader, testTaskDto);
 		} catch (IncompleteDtoException e) {
