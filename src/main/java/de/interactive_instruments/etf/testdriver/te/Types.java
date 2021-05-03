@@ -32,52 +32,52 @@ import de.interactive_instruments.etf.model.EidMap;
  */
 class Types {
 
-	private Types() {}
+    private Types() {}
 
-	// Supported Test Object Types
-	public static final EidMap<TestObjectTypeDto> FEATURES_TE_SUPPORTED_TEST_OBJECT_TYPES = TestObjectTypeDetectorManager
-			.getTypes(
-					// API-FEATURES // 
-					"1e8c4f6d-c4f4-4e1c-bfc3-414469ce6910");
-	public static final EidMap<TestObjectTypeDto> WFS_TE_SUPPORTED_TEST_OBJECT_TYPES = TestObjectTypeDetectorManager
-			.getTypes(
-					// WFS 2.0 
-					"9b6ef734-981e-4d60-aa81-d6730a1c6389");
+    // Supported Test Object Types
+    public static final EidMap<TestObjectTypeDto> TE_SUPPORTED_TEST_OBJECT_TYPES = TestObjectTypeDetectorManager
+            .getTypes(
+                    // API-FEATURES
+                    "1e8c4f6d-c4f4-4e1c-bfc3-414469ce6910");
+    public static final EidMap<TestObjectTypeDto> WFS_TE_SUPPORTED_TEST_OBJECT_TYPES = TestObjectTypeDetectorManager
+            .getTypes(
+                    // WFS 2.0
+                    "9b6ef734-981e-4d60-aa81-d6730a1c6389");
 
-	// Supported Test Item Types
-	public static final EidMap<TestItemTypeDto> TE_TEST_ITEM_TYPES = new DefaultEidMap<TestItemTypeDto>() {
-		{
-			{
-				final TestItemTypeDto testItemTypeDto = new TestItemTypeDto();
-				testItemTypeDto.setLabel("TestNG Test Step");
-				testItemTypeDto.setId(EidFactory.getDefault().createAndPreserveStr("b0469ab7-9d69-49ff-98a1-4c7960829b82"));
-				testItemTypeDto.setDescription("TestNG Test Step");
-				testItemTypeDto.setReference(
-						"http://none");
-				put(testItemTypeDto.getId(), testItemTypeDto);
-			}
+    // Supported Test Item Types
+    public static final EidMap<TestItemTypeDto> TE_TEST_ITEM_TYPES = new DefaultEidMap<TestItemTypeDto>() {
+        {
+            {
+                final TestItemTypeDto testItemTypeDto = new TestItemTypeDto();
+                testItemTypeDto.setLabel("TestNG Test Step");
+                testItemTypeDto.setId(EidFactory.getDefault().createAndPreserveStr("b0469ab7-9d69-49ff-98a1-4c7960829b82"));
+                testItemTypeDto.setDescription("TestNG Test Step");
+                testItemTypeDto.setReference(
+                        "http://none");
+                put(testItemTypeDto.getId(), testItemTypeDto);
+            }
 
-			{
-				final TestItemTypeDto testItemTypeDto = new TestItemTypeDto();
-				testItemTypeDto.setLabel("TestNG Test Assertion set");
-				testItemTypeDto.setId(EidFactory.getDefault().createAndPreserveStr("161baae7-6c84-4bce-8185-3d3618a66011"));
-				testItemTypeDto.setDescription(
-						"Multiple TestNG assertions");
-				testItemTypeDto.setReference(
-						"http://none");
-				put(testItemTypeDto.getId(), testItemTypeDto);
-			}
-		}
-	};
+            {
+                final TestItemTypeDto testItemTypeDto = new TestItemTypeDto();
+                testItemTypeDto.setLabel("TestNG Test Assertion set");
+                testItemTypeDto.setId(EidFactory.getDefault().createAndPreserveStr("161baae7-6c84-4bce-8185-3d3618a66011"));
+                testItemTypeDto.setDescription(
+                        "Multiple TestNG assertions");
+                testItemTypeDto.setReference(
+                        "http://none");
+                put(testItemTypeDto.getId(), testItemTypeDto);
+            }
+        }
+    };
 
-	public static final TagDto TE_TEAM_ENGINE_TAG = createTeTag();
+    public static final TagDto TE_TEAM_ENGINE_TAG = createTeTag();
 
-	private static TagDto createTeTag() {
-		final TagDto tag = new TagDto();
-		tag.setId(EidFactory.getDefault().createUUID("724c1a65-4ae6-47ec-bf61-ba35f81a390a"));
+    private static TagDto createTeTag() {
+        final TagDto tag = new TagDto();
+        tag.setId(EidFactory.getDefault().createUUID("724c1a65-4ae6-47ec-bf61-ba35f81a390a"));
         tag.setPriority(1001);
         tag.setLabel("OGC API Features Test Suites (remote execution)");
-		tag.setDescription("Executable Test Suites that are executed on a remote OGC TEAM Engine instance");
-		return tag;
-	}
+        tag.setDescription("Executable Test Suites that are executed on a remote OGC TEAM Engine instance");
+        return tag;
+    }
 }

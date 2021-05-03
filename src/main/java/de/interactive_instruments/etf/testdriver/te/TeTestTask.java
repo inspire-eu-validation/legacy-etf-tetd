@@ -59,7 +59,7 @@ import de.interactive_instruments.exceptions.config.ConfigurationException;
  *
  * @author Jon Herrmann ( herrmann aT interactive-instruments doT de )
  */
-class WfsTeTestTask extends AbstractTestTask {
+class TeTestTask extends AbstractTestTask {
 
     private final int timeout;
     private final Credentials credentials;
@@ -72,9 +72,9 @@ class WfsTeTestTask extends AbstractTestTask {
      * @throws IOException
      *             I/O error
      */
-    public WfsTeTestTask(final int timeout, final Credentials credentials, final TeTypeLoader typeLoader,
+    public TeTestTask(final int timeout, final Credentials credentials, final TeTypeLoader typeLoader,
             final TestTaskDto testTaskDto) {
-        super(testTaskDto, new TeTestTaskProgress(), WfsTeTestTask.class.getClassLoader());
+        super(testTaskDto, new TeTestTaskProgress(), TeTestTask.class.getClassLoader());
         this.timeout = timeout;
         this.credentials = credentials;
         this.typeLoader = typeLoader;
@@ -98,7 +98,7 @@ class WfsTeTestTask extends AbstractTestTask {
         try {
             wfsUrl = UriUtils.ensureUrlEncodedOnce(endpoint);
             final String apiUrl = testTaskDto.getExecutableTestSuite().getRemoteResource().toString() +
-                    "run?wfs=" + wfsUrl;
+                    "run?iut=" + wfsUrl;
             apiUri = new URI(apiUrl);
         } catch (URISyntaxException syntaxException) {
             // great, try again with an escaped URL. Maybe this is supported in future TE versions...
