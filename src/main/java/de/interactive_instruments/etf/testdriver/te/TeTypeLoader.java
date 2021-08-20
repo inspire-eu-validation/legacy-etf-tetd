@@ -35,6 +35,8 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
+import com.google.gson.*;
+
 
 import de.interactive_instruments.Credentials;
 import de.interactive_instruments.SUtils;
@@ -254,13 +256,18 @@ class TeTypeLoader implements EtsTypeLoader {
         try {
             // Get list of Executable Test Suites
             final String etsOverview = UriUtils.loadAsString(suitesUri, credentials);
-            final Document etsOverviewDoc = Jsoup.parse(etsOverview);
-            final Elements etsUrls = etsOverviewDoc.select("testSuites testSuite endpoint");
-            for (final Element etsUrl : etsUrls) {
+            JsonParser parser = new JsonParser();
+            JsonObject parsed = parser.parse(etsOverview).getAsJsonObject();
+            JsonArray etsUrls = parsed.get("testSuites").getAsJsonArray();
+            // parsed.get("members") devuelve JsonArray. Contiene elements, cada element contiene un JsonObject
+            //final Document etsOverviewDoc = Jsoup.parse(etsOverview);
+            //final Elements etsUrls = etsOverviewDoc.select("testSuites endpoint");
+            for (final JsonElement etsUrl : etsUrls) {
                 // Get single ETS
                 final String etsDetails;
                 // HOTFIX for issue https://github.com/opengeospatial/teamengine/issues/469
-                final String etsUrlStr = etsUrl.text().replace("suites", "suites/");
+                String endpoint = etsUrl.getAsJsonObject().get("endpoint").getAsString();
+                final String etsUrlStr = endpoint.replace("suites", "suites/");
 
                 try {
                     etsDetails = UriUtils.loadAsString(new URI(etsUrlStr), credentials);
