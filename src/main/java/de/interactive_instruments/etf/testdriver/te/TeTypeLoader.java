@@ -90,11 +90,14 @@ class TeTypeLoader implements EtsTypeLoader {
             + "<br/><br/>"
             + "Please report any issues or problems with the OGC CITE tests in the "
             + "<a target=\"_blank\" href=\"https://cite.opengeospatial.org/forum\">OGC Compliance Forum</a>.";
-
+    
+    
+    
     public static final TranslationTemplateBundleDto TE_TRANSLATION_TEMPLATE_BUNDLE = createTranslationTemplateBundle();
 
     // Hotfix for using OGC API TEAM engine endpoint
     private static final String TEAM_FEATURES_VERSION = "1.0";
+    private static final String TEAM_WFS_VERSION = "1.36";
 
     private boolean initialized = false;
     private final EidHolderMap<ExecutableTestSuiteDto> propagatedDtos = new DefaultEidHolderMap<>();
@@ -255,20 +258,15 @@ class TeTypeLoader implements EtsTypeLoader {
 
         try {
             // Get list of Executable Test Suites
-            final String etsOverview = UriUtils.loadAsString(suitesUri, credentials);
-            JsonParser parser = new JsonParser();
-            JsonObject parsed = parser.parse(etsOverview).getAsJsonObject();
-            JsonArray etsUrls = parsed.get("testSuites").getAsJsonArray();
-            // parsed.get("members") devuelve JsonArray. Contiene elements, cada element contiene un JsonObject
-            //final Document etsOverviewDoc = Jsoup.parse(etsOverview);
-            //final Elements etsUrls = etsOverviewDoc.select("testSuites endpoint");
-            for (final JsonElement etsUrl : etsUrls) {
+        	final String etsOverview = Jsoup.connect(suitesUri.toURL().toString())
+                    .header("Accept", "application/xhtml+xml")
+                    .get().toString();
+            final Document etsOverviewDoc = Jsoup.parse(etsOverview);
+            final Elements etsUrls = etsOverviewDoc.select("body ul li a[href]");
+            for (final Element etsUrl : etsUrls) {
                 // Get single ETS
                 final String etsDetails;
-                // HOTFIX for issue https://github.com/opengeospatial/teamengine/issues/469
-                String endpoint = etsUrl.getAsJsonObject().get("endpoint").getAsString();
-                final String etsUrlStr = endpoint.replace("suites", "suites/");
-
+                final String etsUrlStr = UriUtils.getParent(suitesUri).toString() + etsUrl.attr("href");
                 try {
                     etsDetails = UriUtils.loadAsString(new URI(etsUrlStr), credentials);
                 } catch (URISyntaxException e) {
